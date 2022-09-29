@@ -1,6 +1,6 @@
-package rvsusee;
+package rvsusee.eb;
 
 public interface EBBoard {
 	int[] getInputs();
-	int calculateBill(int unit,int unitCost,int tax);
+	double calculateBill(int unit,double unitCost);
 }

@@ -1,4 +1,4 @@
-package rvsusee;
+package rvsusee.eb;
 
 public class EBBillingSystem extends Calculate{
 	public static void main(String[] args) {
@@ -6,29 +6,43 @@ public class EBBillingSystem extends Calculate{
 		System.out.println("\tEB Billing System\t");
 		EBBillingSystem obj = new EBBillingSystem();
 		int inputs[] = obj.getInputs();
-		double cost;
+		double cost = 0;
 		if (inputs[2] <=100) {
 			System.out.println("Bill Due: 0.00rs");
 		}else if (inputs[0] == 1) {
-			inputs[3] -=100;
-			switch (inputs[2]) {
+			inputs[2] -=100;
+			switch (inputs[1]) {
 				case 1: 
-					cost = obj.calculateBill(inputs[2], 2, 100);
+					cost = obj.calculateBill(inputs[2], 1);
 					break;
-					
 				case 2:
-						break;
+					cost = obj.calculateBill(inputs[2], 1.5);
+					break;
 				case 3:
-						break;
+					cost = obj.calculateBill(inputs[2], 2);
+					break;
 				case 4:
-						break;
-
+					cost = obj.calculateBill(inputs[2], 2.5);
+					break;
+			}	
+		}else if (inputs[0] == 2) {
+			inputs[2] -=100;
+			switch (inputs[1]) {
+				case 1: 
+					cost = obj.calculateBill(inputs[2], 1.5);
+					break;
+				case 2:
+					cost = obj.calculateBill(inputs[2], 2);
+					break;
+				case 3:
+					cost = obj.calculateBill(inputs[2], 2.5);
+					break;
+				case 4:
+					cost = obj.calculateBill(inputs[2], 3);
+					break;
 			}
-			
-			
-		}else if (inputs[1] == 2) {
-			
 		}
+		System.out.println("Bill Due: "+cost+" rs");
 	}
 
 	

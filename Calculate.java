@@ -1,4 +1,4 @@
-package rvsusee;
+package rvsusee.eb;
 
 import java.util.Scanner;
 
@@ -11,7 +11,7 @@ public abstract class Calculate implements EBBoard{
 		int cityType = 0;
 		int unit = 0;
 		while(true) {
-			System.out.print("\tEB type \n1.Commercial \t2.Domestic\nEnter Option: ");
+			System.out.print("\tEB type \n1.Domestic \t2.Commercial\nEnter Option: ");
 			connType = sc.nextInt();
 			if (connType == 1 || connType == 2) {
 				break;
@@ -44,39 +44,53 @@ public abstract class Calculate implements EBBoard{
 		return arr;
 	}
 
-	public int calculateBill(int unit,int unitCost,int tax) {
-		int cost = 0;
-		if (unit<200){
-			unit = unit-100;
-			cost += unit*unitCost;
-		}
+	public double calculateBill(int unit,double unitCost) {
+		double cost = 0;
 		
 		if (unit <= 100) {
             return unit * 0;
         }
         else if (unit <= 200) {
-            return (100 * unitCost + 2)
+            return (100 * unitCost + 0.5)
                 + (unit - 100)
-                      * unitCost + 4;
+                      * unitCost + 1.0;
         }
         else if (unit <= 300) {
-            return (100 * unitCost + 2)
-                + (100 * unitCost + 4)
+            return (100 * unitCost + 0.5)
+                + (100 * unitCost + 1.0)
                 + (unit - 200)
-                      * unitCost + 6;
+                      * unitCost + 1.5;
         }
-        else if (unit > 300) {
-            return (100 * unitCost + 2)
-                + (100 * unitCost + 4)
-                + (100 * unitCost + 6)
+        else if (unit <= 400) {
+            return (100 * unitCost + 0.5)
+                + (100 * unitCost + 1.0)
+                + (100 * unitCost + 1.5)
                 + (unit - 300)
-                      * unitCost + 8;
-        }else if (unit > 300) {
-            return (100 * unitCost + 2)
-                    + (100 * unitCost + 4)
-                    + (100 * unitCost + 6)
-                    + (unit - 300)
-                          * unitCost + 8;
+                      * unitCost + 2.0;
+        }else if (unit <= 500) {
+            return (100 * unitCost + 0.5)
+                    + (100 * unitCost + 1.0)
+                    + (100 * unitCost + 1.5)
+                    + (100 * unitCost + 2.0)
+                    + (unit - 400)
+                          * unitCost + 2.5;
+        }else if (unit > 500 && unit <= 1000) {
+            return (100 * unitCost + 0.5)
+                    + (100 * unitCost + 1.0)
+                    + (100 * unitCost + 1.5)
+                    + (100 * unitCost + 2.0)
+                    + (100 * unitCost + 2.5)
+                    + (unit - 500)
+                          * unitCost + 3.0;
+        }else if (unit > 1000 ) {
+            return (100 * unitCost + 0.5)
+                    + (100 * unitCost + 1.0)
+                    + (100 * unitCost + 1.5)
+                    + (100 * unitCost + 2.0)
+                    + (100 * unitCost + 2.5)
+                    + (100 * unitCost + 3.0)
+                    + (unit - 1000)
+                          * unitCost + 4.0;
         }
 		return cost;
 	}
