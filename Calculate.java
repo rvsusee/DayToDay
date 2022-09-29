@@ -9,7 +9,7 @@ public abstract class Calculate implements EBBoard{
 		Scanner sc = new Scanner(System.in);
 		int connType = 0;
 		int cityType = 0;
-		int units = 0;
+		int unit = 0;
 		while(true) {
 			System.out.print("\tEB type \n1.Commercial \t2.Domestic\nEnter Option: ");
 			connType = sc.nextInt();
@@ -30,8 +30,8 @@ public abstract class Calculate implements EBBoard{
 		System.out.println("----------------------------------");
 		while (true) {
 			System.out.print("Enter Unit: ");
-			units = sc.nextInt();
-			if (units>=0) {
+			unit = sc.nextInt();
+			if (unit>=0) {
 				break;
 			}
 			System.out.println("Please Enter Valid Unit");
@@ -40,7 +40,7 @@ public abstract class Calculate implements EBBoard{
 		
 		arr[0] = connType;
 		arr[1] = cityType;
-		arr[2] = units;
+		arr[2] = unit;
 		return arr;
 	}
 
@@ -50,13 +50,34 @@ public abstract class Calculate implements EBBoard{
 			unit = unit-100;
 			cost += unit*unitCost;
 		}
-		if(unit<400) {
-			unit = unit-200;
-			cost += unit * unitCost*0.2;
-		}else if(unit>=500) {
-			unit = unit-100;
-			cost = unit*unitCost;
-		}
+		
+		if (unit <= 100) {
+            return unit * 0;
+        }
+        else if (unit <= 200) {
+            return (100 * unitCost + 2)
+                + (unit - 100)
+                      * unitCost + 4;
+        }
+        else if (unit <= 300) {
+            return (100 * unitCost + 2)
+                + (100 * unitCost + 4)
+                + (unit - 200)
+                      * unitCost + 6;
+        }
+        else if (unit > 300) {
+            return (100 * unitCost + 2)
+                + (100 * unitCost + 4)
+                + (100 * unitCost + 6)
+                + (unit - 300)
+                      * unitCost + 8;
+        }else if (unit > 300) {
+            return (100 * unitCost + 2)
+                    + (100 * unitCost + 4)
+                    + (100 * unitCost + 6)
+                    + (unit - 300)
+                          * unitCost + 8;
+        }
 		return cost;
 	}
 }
