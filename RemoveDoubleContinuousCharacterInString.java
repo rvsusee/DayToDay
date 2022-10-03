@@ -5,14 +5,16 @@ public class RemoveDoubleContinuousCharacterInString {
 		String str = "abbccbdabcoc";
 		while(true) {
 			if(checkRepeatOrNot(str)) {
+				System.out.println(str);
 				str = removeRepeatedChar(str);
+				System.out.println(str);
 			}else {
 				System.out.println("Output is: "+str);				
 				break;
 			}
 		}
 	}
-
+	
 	static String removeRepeatedChar(String str) {
 		String temp = "";
 
@@ -21,6 +23,10 @@ public class RemoveDoubleContinuousCharacterInString {
 				i++;
 			}else {
 				temp+= str.charAt(i);
+			}
+			
+			if(i == str.length()-2 ) {
+				temp += str.charAt(i);
 			}
 		}
 		return temp;
