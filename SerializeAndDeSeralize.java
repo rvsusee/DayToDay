@@ -1,18 +1,33 @@
 package Basic;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class SerializeAndDeSeralize implements Serializable{
 	public static void main(String[] args) {
 		try {
-			FileInputStream file = new FileInputStream("C:\\Users\\User ID\\Documents\\Eclipse Project\\Suseendhiran\\src\\oct\\temp.txt");
+			File file =  new File("C:\\Users\\User ID\\Documents\\Eclipse Project\\Suseendhiran\\src\\oct\\temp.txt");
+			FileOutputStream fileOut = new FileOutputStream(file);
+			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			out.writeObject(new Employee(101, "AAA"));
+
+			out.close();
+			fileOut.close();
+
+			FileInputStream fileInput = new FileInputStream(file);
+			ObjectInputStream input = new ObjectInputStream(fileInput);
 			
-			int i ;
-			while((i= file.read()) != -1) {
-				System.out.print((char)i);
-			}
+			Employee e = (Employee) input.readObject();
+			
+			System.out.println(e.emp_id);
+			
+			
 		}catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 }
