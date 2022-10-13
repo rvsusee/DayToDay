@@ -18,11 +18,15 @@ public class SuperMarket {
 			}
 			inputs.add(product);
 		}
-		
+		sc.close();
+
 		Sauce sauce = new Sauce();
 		Beverges beverges = new Beverges();
 		Dairy dairy = new Dairy();
 		
+		sauce.setName("sauce");
+		beverges.setName("beverges");
+		dairy.setName("dairy");
 		sauce.start();
 		beverges.start();
 		dairy.start();
@@ -33,23 +37,13 @@ public class SuperMarket {
 class Sauce extends Thread{	
 	public void run() {
 		String sauce[]= {"Tomato","chilly","soya"};
-		System.out.println("------Suave------");
-		for (int i = 0; i < SuperMarket.inputs.size(); i++) {
-			if (Linear.search(sauce,SuperMarket.inputs.get(i))) {
-				System.out.println(SuperMarket.inputs.get(i));
-			}
-		}
+		Linear.check(sauce, SuperMarket.inputs);	
 	}
 }
 class Beverges extends Thread{
-	String beverges[]= {"tea","coffee","bonevita","boost","horlicks","complan"};
+	String beverges[]= {"tea","coffee","bonevita","boost","bonevita","complan"};
 	public void run() {
-		System.out.println("------beverges------");
-		for (int i = 0; i < SuperMarket.inputs.size(); i++) {
-			if (Linear.search(beverges,SuperMarket.inputs.get(i))) {
-				System.out.println(SuperMarket.inputs.get(i));
-			}
-		}
+		Linear.check(beverges, SuperMarket.inputs);		
 	}
 	
 }
@@ -57,17 +51,14 @@ class Beverges extends Thread{
 class Dairy extends Thread{
 	String dairy[]= {"curd","milk","butter","ghee","butter"};
 	public void run() {
-		System.out.println("------dairy------");
-		
+		Linear.check(dairy, SuperMarket.inputs);	
 	}
 }
-
-
-
 
 class Linear{
 
 	synchronized static void check(String[] products, ArrayList<String> inputs) {
+		System.out.println("--------"+Thread.currentThread().getName()+"--------");
 		for (int i = 0; i < inputs.size(); i++) {
 			if (Linear.search(products,inputs.get(i))) {
 				System.out.println(inputs.get(i));
